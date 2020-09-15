@@ -9,4 +9,5 @@
 
 <resources>
     <string name="app_name">Login Firebase</string>
+    <string name="login">Login</string>
 </resources>
