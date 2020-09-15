@@ -10,9 +10,11 @@
 package com.indraazimi.login
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,10 +36,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        login.text = if (user == null)
-            getString(R.string.login)
-        else
-            getString(R.string.logout)
+        if (user == null) {
+            namaTextView.visibility = View.GONE
+            imageView.visibility = View.GONE
+            login.text = getString(R.string.login)
+        }
+        else {
+            namaTextView.text = user.displayName
+            Glide.with(this).load(user.photoUrl).dontAnimate().into(imageView)
+
+            namaTextView.visibility = View.VISIBLE
+            imageView.visibility = View.VISIBLE
+            login.text = getString(R.string.logout)
+        }
     }
 
     private fun mulaiLogin() {
