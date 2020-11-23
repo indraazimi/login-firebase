@@ -8,10 +8,10 @@
   -->
 
 <resources>
-    <string name="app_name">Login Firebase</string>
+    <string name="app_name">Check-In Tel-U</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
-    <string name="tampilkan_notifikasi">Tampilkan Notifikasi</string>
+    <string name="checkin_sekarang">Check-in Sekarang</string>
 
     <string name="notif_title">Check-In Tel-U</string>
     <string name="notif_message">Check-in sekarang agar kesehatanmu terpantau!</string>

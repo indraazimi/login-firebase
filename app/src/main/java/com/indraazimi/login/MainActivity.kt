@@ -9,9 +9,11 @@
 
 package com.indraazimi.login
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -24,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val SIGN_IN_REQUEST_CODE = 101
+        private const val CHECK_IN_URL = "https://checkin.telkomuniversity.ac.id"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         login.setOnClickListener { mulaiLogin() }
         logout.setOnClickListener { AuthUI.getInstance().signOut(this) }
+        checkin.setOnClickListener { checkInSekarang() }
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.authState.observe(this, Observer { updateUI(it) })
@@ -60,5 +64,10 @@ class MainActivity : AppCompatActivity() {
             .setAvailableProviders(providers)
             .build()
         startActivityForResult(intent, SIGN_IN_REQUEST_CODE)
+    }
+
+    private fun checkInSekarang() {
+        val intent = CustomTabsIntent.Builder().build()
+        intent.launchUrl(this, Uri.parse(CHECK_IN_URL))
     }
 }
