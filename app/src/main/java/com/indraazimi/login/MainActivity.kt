@@ -35,32 +35,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.login.setOnClickListener { mulaiLogin() }
+        binding.logout.setOnClickListener { AuthUI.getInstance().signOut(this) }
 
         viewModel.authState.observe(this, { updateUI(it) })
     }
 
     private fun updateUI(user: FirebaseUser?) = with(binding) {
         if (user == null) {
-            namaTextView.visibility = View.GONE
-            imageView.visibility = View.GONE
-            login.text = getString(R.string.login)
+            userGroup.visibility = View.GONE
+            login.visibility = View.VISIBLE
         }
         else {
             namaTextView.text = user.displayName
             Glide.with(this@MainActivity).load(user.photoUrl).into(imageView)
 
-            namaTextView.visibility = View.VISIBLE
-            imageView.visibility = View.VISIBLE
-            login.text = getString(R.string.logout)
+            userGroup.visibility = View.VISIBLE
+            login.visibility = View.GONE
         }
     }
 
     private fun mulaiLogin() {
-        if (binding.login.text == getString(R.string.logout)) {
-            AuthUI.getInstance().signOut(this)
-            return
-        }
-
         val providers = arrayListOf(AuthUI.IdpConfig.GoogleBuilder().build())
         val intent = AuthUI.getInstance()
             .createSignInIntentBuilder()
