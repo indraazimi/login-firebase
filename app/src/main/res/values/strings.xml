@@ -11,4 +11,11 @@
     <string name="app_name">Login Firebase</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
+    <string name="tampilkan_notifikasi">Tampilkan Notifikasi</string>
+
+    <string name="notif_title">Check-In Tel-U</string>
+    <string name="notif_message">Check-in sekarang agar kesehatanmu terpantau!</string>
+    <string name="notif_channel_id" translatable="false">reminder</string>
+    <string name="notif_channel_name">Reminder</string>
+    <string name="notif_channel_desc">Reminder check-in tiap beberapa jam.</string>
 </resources>
