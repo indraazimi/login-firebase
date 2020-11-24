@@ -35,14 +35,13 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.authState.observe(this, Observer { updateUI(it) })
-
-        AlarmUtils.setAlarm(this)
     }
 
     private fun updateUI(user: FirebaseUser?) {
         if (user == null) {
             userGroup.visibility = View.GONE
             login.visibility = View.VISIBLE
+            AlarmUtils.setAlarmOff(this)
         }
         else {
             namaTextView.text = user.displayName
@@ -50,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
             userGroup.visibility = View.VISIBLE
             login.visibility = View.GONE
+            AlarmUtils.setAlarm(this)
         }
     }
 
