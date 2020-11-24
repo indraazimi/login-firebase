@@ -27,6 +27,16 @@ object AlarmUtils {
             AlarmManager.INTERVAL_HALF_DAY, pendingIntent)
     }
 
+    fun setAlarmOff(context: Context) {
+        val intent = Intent(context, ReminderReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE, intent,
+            PendingIntent.FLAG_NO_CREATE)
+        val manager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+        if (pendingIntent != null && manager != null) {
+            manager.cancel(pendingIntent)
+        }
+    }
+
     private fun getTime(): Long {
         val calendar = Calendar.getInstance()
 
