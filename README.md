@@ -1,14 +1,15 @@
-# Login Firebase
+# Check-In Tel-U
 
-Aplikasi Android sederhana yang menggunakan FirebaseUI untuk fitur login dengan akun Google pengguna.
+Aplikasi Android yang menggunakan FirebaseUI untuk fitur login dengan akun Google pengguna. Setelah login, pengguna dapat melakukan check-in. Pengguna juga akan mendapatkan reminder check-in berupa notifikasi.
 
-Sebelum login                                      | Setelah login
----------------------------------------------------|----------------------------------------------------
-<img src="screenshots/belum-login.png" width="250">|<img src="screenshots/login-sukses.png" width="250">
+Tampilan Utama                               | Custom Tabs                                   | Notifikasi
+---------------------------------------------|-----------------------------------------------|--------------------------------------------------
+<img src="screenshots/utama.png" width="200">|<img src="screenshots/checkin.png" width="200">|<img src="screenshots/notifikasi.png" width="200">
 
 Aplikasi ini menggunakan beberapa library lain, diantaranya:
 - Glide, untuk mengambil foto profil pengguna dari server
 - CircleImageView, untuk menampilkan foto profil pengguna
+- Custom Tabs, untuk menampilkan halaman web check-in
 
 Punya pertanyaan atau masukan? Silahkan disampaikan melalui issue repository ini.
 
