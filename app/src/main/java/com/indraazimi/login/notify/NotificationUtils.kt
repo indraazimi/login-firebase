@@ -37,15 +37,14 @@ fun NotificationManager.sendNotification(context: Context) {
         .setContentIntent(pendingIntent)
         .setAutoCancel(true)
 
-    createChannel(context)
     notify(NOTIFICATION_ID, builder.build())
 }
 
-private fun createChannel(context: Context) {
+fun createChannel(context: Context, idRes: Int, nameRes: Int, descRes: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val notificationChannel = NotificationChannel(
-            context.getString(R.string.notif_channel_id),
-            context.getString(R.string.notif_channel_name),
+            context.getString(idRes),
+            context.getString(nameRes),
             NotificationManager.IMPORTANCE_HIGH
         )
 
@@ -56,7 +55,7 @@ private fun createChannel(context: Context) {
             enableLights(true)
             lightColor = Color.RED
             enableVibration(true)
-            description = context.getString(R.string.notif_channel_desc)
+            description = context.getString(descRes)
         }
 
         val notificationManager = context.getSystemService(NotificationManager::class.java)
