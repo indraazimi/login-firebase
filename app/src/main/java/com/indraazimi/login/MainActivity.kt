@@ -21,6 +21,7 @@ import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.firebase.auth.FirebaseUser
 import com.indraazimi.login.databinding.ActivityMainBinding
 import com.indraazimi.login.notify.AlarmUtils
+import com.indraazimi.login.notify.createChannel
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,6 +47,25 @@ class MainActivity : AppCompatActivity() {
         binding.checkin.setOnClickListener { checkInSekarang() }
 
         viewModel.authState.observe(this, { updateUI(it) })
+
+        // Notifikasi task sebelumnya memiliki channel "Lain-lain"
+        // sehingga kurang informatif. Jadi kita buat channel baru
+        // khusus untuk notifikasi dari Firebase Cloud Messaging.
+        createChannel(
+            this,
+            R.string.news_channel_id,
+            R.string.news_channel_name,
+            R.string.news_channel_desc
+        )
+
+        // Agar pembuatan channel berada di satu tempat, pindahkan
+        // channel sebelumnya (yang reminder) ke sini juga.
+        createChannel(
+            this,
+            R.string.notif_channel_id,
+            R.string.notif_channel_name,
+            R.string.notif_channel_desc
+        )
     }
 
     private fun updateUI(user: FirebaseUser?) = with(binding) {
