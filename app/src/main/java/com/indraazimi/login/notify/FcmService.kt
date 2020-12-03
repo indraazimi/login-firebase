@@ -14,6 +14,10 @@ import com.google.firebase.messaging.FirebaseMessagingService
 
 class FcmService : FirebaseMessagingService() {
 
+    companion object {
+        const val KEY_URL = "url"
+    }
+
     override fun onNewToken(token: String) {
         // Ini akan dipanggil setiap kali token baru di-generate.
         // Setelah mendapat token baru, biasanya kita mengirimnya

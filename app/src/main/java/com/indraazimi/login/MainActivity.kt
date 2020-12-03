@@ -9,6 +9,7 @@
 
 package com.indraazimi.login
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -21,6 +22,7 @@ import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.firebase.auth.FirebaseUser
 import com.indraazimi.login.databinding.ActivityMainBinding
 import com.indraazimi.login.notify.AlarmUtils
+import com.indraazimi.login.notify.FcmService
 import com.indraazimi.login.notify.createChannel
 
 class MainActivity : AppCompatActivity() {
@@ -66,6 +68,8 @@ class MainActivity : AppCompatActivity() {
             R.string.notif_channel_name,
             R.string.notif_channel_desc
         )
+
+        tanganiPengumuman(intent)
     }
 
     private fun updateUI(user: FirebaseUser?) = with(binding) {
@@ -96,5 +100,12 @@ class MainActivity : AppCompatActivity() {
     private fun checkInSekarang() {
         val intent = CustomTabsIntent.Builder().build()
         intent.launchUrl(this, Uri.parse(CHECK_IN_URL))
+    }
+
+    private fun tanganiPengumuman(intent: Intent) {
+        if (!intent.hasExtra(FcmService.KEY_URL)) return
+        val url = intent.getStringExtra(FcmService.KEY_URL) ?: return
+        val tabsIntent = CustomTabsIntent.Builder().build()
+        tabsIntent.launchUrl(this, Uri.parse(url))
     }
 }
