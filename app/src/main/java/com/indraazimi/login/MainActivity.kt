@@ -72,6 +72,13 @@ class MainActivity : AppCompatActivity() {
         tanganiPengumuman(intent)
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent != null) {
+            tanganiPengumuman(intent)
+        }
+    }
+
     private fun updateUI(user: FirebaseUser?) = with(binding) {
         if (user == null) {
             userGroup.visibility = View.GONE
