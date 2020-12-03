@@ -21,6 +21,7 @@ import com.indraazimi.login.MainActivity
 import com.indraazimi.login.R
 
 private const val NOTIFICATION_ID = 0
+private const val PENGUMUMAN_ID = 1
 
 fun NotificationManager.sendNotification(context: Context) {
     val intent = Intent(context, MainActivity::class.java)
@@ -38,6 +39,26 @@ fun NotificationManager.sendNotification(context: Context) {
         .setAutoCancel(true)
 
     notify(NOTIFICATION_ID, builder.build())
+}
+
+fun NotificationManager.sendNotification(context: Context,
+                                         title: String, body: String, url: String) {
+    val intent = Intent(context, MainActivity::class.java)
+    intent.putExtra(FcmService.KEY_URL, url)
+    val pendingIntent = PendingIntent.getActivity(context,
+        PENGUMUMAN_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+    val builder = NotificationCompat.Builder(
+        context,
+        context.getString(R.string.news_channel_id)
+    )
+        .setSmallIcon(R.mipmap.ic_launcher_round)
+        .setContentTitle(title)
+        .setContentText(body)
+        .setContentIntent(pendingIntent)
+        .setAutoCancel(true)
+
+    notify(PENGUMUMAN_ID, builder.build())
 }
 
 fun createChannel(context: Context, idRes: Int, nameRes: Int, descRes: Int) {
