@@ -13,6 +13,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import java.util.*
 
 object AlarmUtils {
@@ -21,7 +22,14 @@ object AlarmUtils {
 
     fun setAlarm(context: Context) {
         val intent = Intent(context, ReminderReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE, intent, 0)
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(
+                context, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+            )
+        } else {
+            PendingIntent.getBroadcast(
+                context, REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
         val manager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
         manager?.setInexactRepeating(AlarmManager.RTC_WAKEUP, getTime(),
             AlarmManager.INTERVAL_HALF_DAY, pendingIntent)
