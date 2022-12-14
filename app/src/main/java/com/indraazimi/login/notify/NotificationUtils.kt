@@ -24,8 +24,12 @@ private const val NOTIFICATION_ID = 0
 
 fun NotificationManager.sendNotification(context: Context) {
     val intent = Intent(context, MainActivity::class.java)
-    val pendingIntent = PendingIntent.getActivity(context,
-        NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    val pendingIntent = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+        PendingIntent.getActivity(context, NOTIFICATION_ID, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+    } else {
+        PendingIntent.getActivity(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    }
 
     val builder = NotificationCompat.Builder(
         context,
