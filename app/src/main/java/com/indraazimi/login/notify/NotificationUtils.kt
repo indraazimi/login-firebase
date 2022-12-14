@@ -25,8 +25,12 @@ private const val PENGUMUMAN_ID = 1
 
 fun NotificationManager.sendNotification(context: Context) {
     val intent = Intent(context, MainActivity::class.java)
-    val pendingIntent = PendingIntent.getActivity(context,
-        NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    val pendingIntent = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+        PendingIntent.getActivity(context, NOTIFICATION_ID, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+    } else {
+        PendingIntent.getActivity(context, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    }
 
     val builder = NotificationCompat.Builder(
         context,
@@ -45,8 +49,12 @@ fun NotificationManager.sendNotification(context: Context,
                                          title: String, body: String, url: String) {
     val intent = Intent(context, MainActivity::class.java)
     intent.putExtra(FcmService.KEY_URL, url)
-    val pendingIntent = PendingIntent.getActivity(context,
-        PENGUMUMAN_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    val pendingIntent = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+        PendingIntent.getActivity(context, PENGUMUMAN_ID, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
+    } else {
+        PendingIntent.getActivity(context, PENGUMUMAN_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    }
 
     val builder = NotificationCompat.Builder(
         context,
