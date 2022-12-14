@@ -37,8 +37,13 @@ object AlarmUtils {
 
     fun setAlarmOff(context: Context) {
         val intent = Intent(context, ReminderReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, REQUEST_CODE, intent,
-            PendingIntent.FLAG_NO_CREATE)
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            PendingIntent.getBroadcast(context, REQUEST_CODE, intent,
+                PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getBroadcast(context, REQUEST_CODE, intent,
+                PendingIntent.FLAG_NO_CREATE)
+        }
         val manager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
         if (pendingIntent != null && manager != null) {
             manager.cancel(pendingIntent)
