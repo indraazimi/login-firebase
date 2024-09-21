@@ -1,5 +1,9 @@
 # Check-In Tel-U
 
+**Repository diarsipkan** karena materi Mobpro 2 mulai September 2024 sudah menggunakan Jetpack Compose untuk layout, dan menggunakan studi kasus yang berbeda. Untuk melihat project terbaru, silahkan kunjungi repo [indraazimi/mobpro2-compose](https://github.com/indraazimi/mobpro2-compose) 😊
+
+..
+
 Aplikasi Android yang menggunakan FirebaseUI untuk fitur login dengan akun Google pengguna. Setelah login, pengguna dapat melakukan check-in. Pengguna juga akan mendapatkan reminder check-in berupa notifikasi.
 
 Aplikasi ini juga menggunakan Firebase Cloud Messaging (FCM) untuk mendapatkan notifikasi berupa pengumuman. Notifikasi ini mengandung custom data yang dapat ditangani aplikasi di foreground ataupun background.
